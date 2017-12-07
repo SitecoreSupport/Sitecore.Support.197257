@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\zzz\Sitecore.Support.197257.config" />
+    <Content Include="sitecore\shell\Applications\Content Manager\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

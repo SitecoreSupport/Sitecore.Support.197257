@@ -10,12 +10,12 @@ namespace Sitecore.Support.Shell.Applications.ContentManager
 {
     public class ContentEditorForm: Sitecore.Shell.Applications.ContentManager.ContentEditorForm
     {
-        protected void TreeSearchOptionName_Click()
+        public void TreeSearchOptionName_ClickTest()
         {
             string control = Context.ClientPage.ClientRequest.Control;
             string text = StringUtil.Mid(control, 20);
             SheerResponse.DisableOutput();
-            Web.UI.HtmlControls.Menu menu = new Web.UI.HtmlControls.Menu();
+            Sitecore.Web.UI.HtmlControls.Menu menu = new Sitecore.Web.UI.HtmlControls.Menu();
             Hashtable arg_38_0 = base.FieldInfo;
             bool flag = false;
             SortedList sortedList = new SortedList(StringComparer.Ordinal);
@@ -24,9 +24,10 @@ namespace Sitecore.Support.Shell.Applications.ContentManager
                 Item item = Client.ContentDatabase.GetItem(fieldInfo.FieldID);
                 if (item != null)
                 {
-                    if (!sortedList.ContainsKey(item.GetUIDisplayName()))
+                    if (!sortedList.ContainsKey(GetTitle(item)))
                     {
-                        sortedList.Add(item.GetUIDisplayName(), item.Key);
+
+                        sortedList.Add(Sitecore.Globalization.Translate.Text(GetTitle(item)), item.Key);
                     }
                     flag = true;
                 }
@@ -42,6 +43,15 @@ namespace Sitecore.Support.Shell.Applications.ContentManager
             menu.Add("Remove", "Remove", string.Empty, string.Empty, "javascript:scContent.removeSearchCriteria(\"" + text + "\")", false, string.Empty, MenuItemType.Normal);
             SheerResponse.EnableOutput();
             SheerResponse.ShowPopup(control, "below", menu);
+        }
+        private string GetTitle(Item item)
+        {
+            if (item.Fields["Title"].Value != "")
+
+            {
+                return item.Fields["Title"].Value;
+            }
+            return item.Name;
         }
 
     }
