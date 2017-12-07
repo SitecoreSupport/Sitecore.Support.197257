@@ -10,7 +10,7 @@ namespace Sitecore.Support.Shell.Applications.ContentManager
 {
     public class ContentEditorForm: Sitecore.Shell.Applications.ContentManager.ContentEditorForm
     {
-        public void TreeSearchOptionName_ClickTest()
+        public void TreeSearchOptionName_Click()
         {
             string control = Context.ClientPage.ClientRequest.Control;
             string text = StringUtil.Mid(control, 20);
